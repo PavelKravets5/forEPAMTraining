@@ -66,16 +66,17 @@ namespace Module_3_Task_8
             return func;
         }
 
+
         static string MakeEqualizationRec(double[] coef, double[] interv,double acc)
         {
             
-            if (2 * acc >= Math.Abs(interv[1] - interv[0]))
+            if (2*acc >= Math.Abs(interv[1] - interv[0]))
             {
                 return $"Решение найдено интервал [{interv[0]},{interv[1]}]";
             }
             else
             {
-                double middle = (Math.Abs(interv[0])+Math.Abs(interv[1]))/2;
+                double middle = (interv[0]+interv[1])/2;
                 if (Function(coef, interv[0]) * Function(coef, middle) < 0)
                 {
                     interv[1] = middle;
