@@ -17,13 +17,12 @@ namespace Module_4_Task_5
         static void Main(string[] args)
         {
             double[] nums = new double[2];
-            double el = 0;
             bool check = false;
             for (int i = 0; i < 2; i++)
             {
 
                 Console.WriteLine($"Вводите {i + 1} из 2 чисел");
-                check = double.TryParse(Console.ReadLine(), out el);
+                check = double.TryParse(Console.ReadLine(), out double el);
                 while (!check)
                 {
                     Console.WriteLine("Некорректно, еще раз");
@@ -39,33 +38,34 @@ namespace Module_4_Task_5
                 "нажмите 4 для деления (первое/второе)\n" +
                 "нажмите 5 для возведения в степень (первое^второе)");
             check = false;    
-            int n = 0;
+            int ans = 0;
             while (!check)
             {
-                check = int.TryParse(Console.ReadLine(), out n);
-                if (check == false || n < 1|| n>5)
+                check = int.TryParse(Console.ReadLine(), out ans);
+                if (check == false || ans < 1|| ans > 5)
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");
                 }
             }
-            Operations op = (Operations)n;
+            Operations op = (Operations)ans;
             Console.WriteLine($"Результат мат. операции {op} = {Operation(nums[0],nums[1], op):f2}");
 
             Console.WriteLine("Вводите номер или название месяца по английски полностью или сокращенно " +
                 "- 3 буквы с которых начинается месяц (типа Dec, Nov, Sep)");
             check = false;
             string str = null;
+            ans = 0;
             while (!check)
             {
                 str = Console.ReadLine();
-                check = int.TryParse(str, out n);
-                if (!check || n<1 || n>12)
+                check = int.TryParse(str, out ans);
+                if (!check || ans < 1 || ans > 12)
                 {
                     check = false;
                     if (str.Length >= 3)
                     {
-                        check = GetMonthName(str, out n);
+                        check = GetMonthName(str, out ans);
                     }
                     if (!check)
                     {
@@ -91,10 +91,10 @@ namespace Module_4_Task_5
                     Console.WriteLine("Некорректно, еще раз");
                 }
             }
-            MonthNames month=(MonthNames)n;
+            MonthNames month=(MonthNames)ans;
             
             Console.WriteLine($"В месяце {month} дней " +
-                $"{((str == "y" && n == 2) ? DaysInMonth(month) + 1 : DaysInMonth(month))}.");
+                $"{((str == "y" && ans == 2) ? DaysInMonth(month) + 1 : DaysInMonth(month))}.");
         }
 
         static private double Operation(double a,double b, Operations op)
@@ -131,14 +131,14 @@ namespace Module_4_Task_5
             return result;
         }
 
-        static private bool GetMonthName(string str,out int n)
+        static private bool GetMonthName(string str,out int number)
         {
-            n = 0;
+            number = 0;
             for(int i=1;i<=12;i++)
             {
                 if(((MonthNames)i).ToString().ToUpper().StartsWith(str.ToUpper()))
                 {
-                    n = i;
+                    number = i;
                     return true;
                 }
             }
@@ -148,68 +148,20 @@ namespace Module_4_Task_5
         static private int DaysInMonth(MonthNames name)
         {
             int result = 0;
-            switch (name)
+            //Здесь всего 3 варианта ответа 31/30/28 дней. Так что я решил
+            //использовать if c 3-1 вариантами, а не switch/case с 12-1 вариантами
+            if(name== MonthNames.January||name==MonthNames.March||name==MonthNames.May||
+                name==MonthNames.July||name==MonthNames.August||name==MonthNames.October||
+                name==MonthNames.December)
             {
-                case MonthNames.January:
-                    {
-                        result = 31;
-                    }
-                    break;
-                case MonthNames.February:
-                    {
-                        result = 28;
-                    }
-                    break;
-                case MonthNames.March:
-                    {
-                        result = 31;
-                    }
-                    break;
-                case MonthNames.April:
-                    {
-                        result = 30;
-                    }
-                    break;
-                case MonthNames.May:
-                    {
-                        result = 31;
-                    }
-                    break;
-                case MonthNames.June:
-                    {
-                        result = 30;
-                    }
-                    break;
-                case MonthNames.July:
-                    {
-                        result = 31;
-                    }
-                    break;
-                case MonthNames.August:
-                    {
-                        result = 31;
-                    }
-                    break;
-                case MonthNames.September:
-                    {
-                        result = 30;
-                    }
-                    break;
-                case MonthNames.October:
-                    {
-                        result = 31;
-                    }
-                    break;
-                case MonthNames.November:
-                    {
-                        result = 30;
-                    }
-                    break;
-                case MonthNames.December:
-                    {
-                        result = 31;
-                    }
-                    break;
+                result = 31;
+            }
+            else
+            {
+                if(name!=MonthNames.February)
+                {
+                    result = 30;
+                }
             }
             return result;
         }

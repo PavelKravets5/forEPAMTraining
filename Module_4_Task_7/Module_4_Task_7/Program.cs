@@ -125,9 +125,8 @@ namespace Module_4_Task_7
                 Console.WriteLine($"Заполняем вручную:");
                 for (int i = 0; i < arrSize; i++)
                 {
-                    double el;
                     Console.WriteLine($"Вводите {i + 1} эл. массива");
-                    check = double.TryParse(Console.ReadLine(), out el);
+                    check = double.TryParse(Console.ReadLine(), out double el);
                     while (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");

@@ -59,8 +59,7 @@ namespace Module_4_Task_2
         //Я так и не придумал, и сделал так:
         static private double ReadWithCheckDouble()
         {
-            double el = 0;
-            bool check = double.TryParse(Console.ReadLine(), out el);
+            bool check = double.TryParse(Console.ReadLine(), out double el);
             while (!check)
             {
                 Console.WriteLine("Некорректно, еще раз");
@@ -71,8 +70,7 @@ namespace Module_4_Task_2
 
         static private int ReadWithCheckInt()
         {
-            int el = 0;
-            bool check = int.TryParse(Console.ReadLine(), out el);
+            bool check = int.TryParse(Console.ReadLine(), out int el);
             while (!check)
             {
                 Console.WriteLine("Некорректно, еще раз");

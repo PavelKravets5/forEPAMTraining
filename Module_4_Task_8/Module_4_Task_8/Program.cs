@@ -5,7 +5,7 @@ namespace Module_4_Task_8
 {
     class Program
     {
-        static double Function(double[] coef, double arg)
+        static double GetFunction(double[] coef, double arg)
         {
             double func = 0;
             for (int i = coef.Length - 1; i >= 0; i--)
@@ -47,7 +47,7 @@ namespace Module_4_Task_8
         {
             success = false;
             //Я решил, что проверка правильности интервала должна быть первична
-            if (Function(coef, interv[0]) * Function(coef, interv[1]) > 0)
+            if (GetFunction(coef, interv[0]) * GetFunction(coef, interv[1]) > 0)
             {
                 return;
             }
@@ -75,14 +75,14 @@ namespace Module_4_Task_8
         {
             success = false;
             
-            if (Function(coef, interv[0]) * Function(coef, interv[1]) <= 0)
+            if (GetFunction(coef, interv[0]) * GetFunction(coef, interv[1]) <= 0)
             {
                 success = true;
                 //Все таки решил сделать одинарную точность
                 while (acc < Math.Abs(interv[1] - interv[0]))
                 {
                     double middle = (interv[0] + interv[1]) / 2;
-                    if (Function(coef, interv[0]) * Function(coef, middle) < 0)
+                    if (GetFunction(coef, interv[0]) * GetFunction(coef, middle) < 0)
                     {
                         interv[1] = middle;
                     }
@@ -104,24 +104,23 @@ namespace Module_4_Task_8
             Console.WriteLine("Решаем многочлен с 1 неизвестным \n" +
                 "Введите кол-во коэффициентов (равное n) при неизвестных x^n + ... + x^0");
 
-            int n = 0;
+            int arrSize = 0;
             bool check = false;
             while (!check)
             {
-                check = int.TryParse(Console.ReadLine(), out n);
-                if (check == false || n < 0)
+                check = int.TryParse(Console.ReadLine(), out arrSize);
+                if (check == false || arrSize < 0)
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");
                 }
             }
-            double[] coef = new double[n];
-            double el = 0;
-            for (int i = 0; i < n; i++)
+            double[] coef = new double[arrSize];
+            for (int i = 0; i < arrSize; i++)
             {
 
                 Console.WriteLine($"Вводите {i + 1} коэффициент, от старшей степени к нулевой");
-                check = double.TryParse(Console.ReadLine(), out el);
+                check = double.TryParse(Console.ReadLine(), out double el);
                 while (!check)
                 {
                     Console.WriteLine("Некорректно, еще раз");
@@ -131,12 +130,11 @@ namespace Module_4_Task_8
             }
 
             double[] interval = new double[2];
-            el = 0;
             for (int i = 0; i < 2; i++)
             {
 
                 Console.WriteLine($"Вводите {i + 1} из 2 значений интервала");
-                check = double.TryParse(Console.ReadLine(), out el);
+                check = double.TryParse(Console.ReadLine(), out double el) ;
                 while (!check)
                 {
                     Console.WriteLine("Некорректно, еще раз");
@@ -154,9 +152,8 @@ namespace Module_4_Task_8
                 check = double.TryParse(Console.ReadLine(), out acc);
             }
 
-            bool success;
             double[] temp = CopyArr(interval);
-            SolutionEqualizationRec(coef, temp, acc, out success);
+            SolutionEqualizationRec(coef, temp, acc, out bool success);
             if(success)
             {
                 Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +

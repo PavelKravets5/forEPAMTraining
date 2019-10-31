@@ -34,9 +34,8 @@ namespace Module_4_Task_4
             Console.WriteLine("Вводим переменные для пункта A:");
             for (int i = 0; i < 3; i++)
             {
-                double el;
                 Console.WriteLine($"Вводите {i + 1} переменную.");
-                check = double.TryParse(Console.ReadLine(), out el);
+                check = double.TryParse(Console.ReadLine(), out double el);
                 while (!check)
                 {
                     Console.WriteLine("Некорректно, еще раз");
@@ -46,8 +45,7 @@ namespace Module_4_Task_4
             }
 
             Console.WriteLine("Вводите радиус для пункта Б:");
-            double radius;
-            check = double.TryParse(Console.ReadLine(), out radius);
+            check = double.TryParse(Console.ReadLine(), out double radius);
             while (!check)
             {
                 Console.WriteLine("Некорректно, еще раз");
