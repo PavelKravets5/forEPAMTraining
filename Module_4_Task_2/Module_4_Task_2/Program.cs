@@ -122,21 +122,21 @@ namespace Module_4_Task_2
             for(int j=0; j<2;j++)
             {
                 Console.WriteLine($"Ввелите длинну {j+1} массива:");
-                int n = 0;
+                int arrSize = 0;
                 bool check = false;
                 while (!check)
                 {
-                    check = int.TryParse(Console.ReadLine(), out n);
-                    if (check == false || n < 0)
+                    check = int.TryParse(Console.ReadLine(), out arrSize);
+                    if (check == false || arrSize <= 0)
                     {
                         check = false;
                         Console.WriteLine("Некорректно, еще раз");
                     }
                 }
-                twoArr[j] = new double[n];
-                for (int i = 0; i < n; i++)
+                twoArr[j] = new double[arrSize];
+                for (int i = 0; i < arrSize; i++)
                 {
-                    Console.WriteLine($"Вводите {i + 1} число в массиве {j+1} из {n}");
+                    Console.WriteLine($"Вводите {i + 1} число в массиве {j+1} из {arrSize}");
                     twoArr[j][i] = ReadWithCheckDouble();
                 }
             }

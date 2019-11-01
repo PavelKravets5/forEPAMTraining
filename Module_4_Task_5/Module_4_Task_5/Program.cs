@@ -13,7 +13,11 @@ namespace Module_4_Task_5
             January=1, February=2, March=3, April=4, May=5, June=6, July=7, August=8,
             September=9, October=10, November=11, December=12
         }
-        
+
+        const int lowerLimit = 1;
+        const int upperLimit1 = 5;
+        const int upperLimit2 = 12;
+
         static void Main(string[] args)
         {
             double[] nums = new double[2];
@@ -42,7 +46,7 @@ namespace Module_4_Task_5
             while (!check)
             {
                 check = int.TryParse(Console.ReadLine(), out ans);
-                if (check == false || ans < 1|| ans > 5)
+                if (check == false || ans < lowerLimit|| ans > upperLimit1)
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");
@@ -60,7 +64,7 @@ namespace Module_4_Task_5
             {
                 str = Console.ReadLine();
                 check = int.TryParse(str, out ans);
-                if (!check || ans < 1 || ans > 12)
+                if (!check || ans < lowerLimit || ans > upperLimit2)
                 {
                     check = false;
                     if (str.Length >= 3)

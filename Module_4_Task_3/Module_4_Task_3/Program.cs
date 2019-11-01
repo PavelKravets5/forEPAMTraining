@@ -57,7 +57,7 @@ namespace Module_4_Task_3
             while (!check)
             {
                 check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize < 0 || arrSize == 0)
+                if (check == false || arrSize <= 0)
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");
@@ -115,9 +115,12 @@ namespace Module_4_Task_3
             GetCicleSquareAndPerim(radius, out double square, out double length);
             MethodsForArr(arr, out double max, out double min, out double sum);
             Console.WriteLine($"\n\nЗаполнено.\n\n" +
-                $"Три введенных числа увеличены на 10: {arrParam[0]:f2}, {arrParam[1]:f2}, {arrParam[2]:f2}\n" +
-                $"По введенному радиусу найдена площадь: {square:f2} и длинна окружности: {length:f2}\n" +
-                $"Для массива максимальный эл.: {max:f2}, минимальный эл.: {min:f2}, сумма эл.: {sum:f2}");
+                $"Три введенных числа увеличены на 10: " +
+                $"{arrParam[0]:f2}, {arrParam[1]:f2}, {arrParam[2]:f2}\n" +
+                $"По введенному радиусу найдена площадь: {square:f2} " +
+                $"и длинна окружности: {length:f2}\n" +
+                $"Для массива максимальный эл.: {max:f2}, " +
+                $"минимальный эл.: {min:f2}, сумма эл.: {sum:f2}");
         }
     }
 }

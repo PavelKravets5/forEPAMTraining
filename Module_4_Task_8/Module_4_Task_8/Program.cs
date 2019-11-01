@@ -109,7 +109,7 @@ namespace Module_4_Task_8
             while (!check)
             {
                 check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize < 0)
+                if (check == false || arrSize <= 0)
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");

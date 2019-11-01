@@ -105,7 +105,7 @@ namespace Module_4_Task_1
             while (!check)
             {
                 check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize < 0|| arrSize==0)
+                if (check == false || arrSize <= 0)
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");
@@ -165,8 +165,10 @@ namespace Module_4_Task_1
             Console.WriteLine($"\n\nЗаполнено.\n\n" +
                 $"Через циклы\n\n" +
                 $"Макс. эл. массива: {GetMaxEl(arr)}, мин. эл. массива: {GetMinEl(arr)}\n" +
-                $"Разность между макс. и мин. эл.: {DifferenceBetweenMinMax(arr)}, сумма эл. массива: {GetSum(arr)}.\n" +
-                $"По итогам увеличения четных эл. массива на макс. эл. массива и уменьшения нечетных на мин. эл." +
+                $"Разность между макс. и мин. эл.: {DifferenceBetweenMinMax(arr)}, " +
+                $"сумма эл. массива: {GetSum(arr)}.\n" +
+                $"По итогам увеличения четных эл. массива на макс. эл. массива и " +
+                $"уменьшения нечетных на мин. эл." +
                 $"массив выглядит так:");
 
             int[] copyArr = CopyArrByLinq(arr);
@@ -178,9 +180,12 @@ namespace Module_4_Task_1
             }
 
             Console.WriteLine($"\n\nТеперь тоже самое через Linq:\n\n" +
-                $"Макс. эл. массива: {GetMaxElByLinq(copyArr)}, мин. эл. массива: {GetMinElByLinq(copyArr)}\n" +
-                $"Разность между макс. и мин. эл.: {DifferenceBetweenMinMaxByLinq(copyArr)}, сумма эл. массива: {GetSumByLinq(copyArr)}.\n" +
-                $"По итогам увеличения четных эл. массива на макс. эл. массива и уменьшения нечетных на мин. эл." +
+                $"Макс. эл. массива: {GetMaxElByLinq(copyArr)}, " +
+                $"мин. эл. массива: {GetMinElByLinq(copyArr)}\n" +
+                $"Разность между макс. и мин. эл.: {DifferenceBetweenMinMaxByLinq(copyArr)}, " +
+                $"сумма эл. массива: {GetSumByLinq(copyArr)}.\n" +
+                $"По итогам увеличения четных эл. массива на макс. эл. массива и " +
+                $"уменьшения нечетных на мин. эл." +
                 $"массив выглядит так:");
 
             copyArr=TransformArrByLinq(copyArr);
