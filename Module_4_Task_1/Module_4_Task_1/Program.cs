@@ -99,10 +99,9 @@ namespace Module_4_Task_1
 
         private const int limit1 = 1;
 
-        //Я долго думал как убрать или уменьшить
-        //длиннющие
+        //Я долго думал как убрать или уменьшить длиннющие
         //полотнища кода, где ввожу данные, проверяю корректность ввода, корректность ограничений,
-        //лишь бы вынося Console.WriteLine(), Console.ReadLine() за пределы метода Main
+        //лишь бы не выносить Console.WriteLine(), Console.ReadLine() за пределы метода Main
         //Я так и не придумал, и сделал так (здесь и далее):
         static private int ReadWithCheckInt()
         {
