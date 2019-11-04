@@ -5,24 +5,53 @@ namespace Module_4_Task_3
 {
     class Program
     {
-        static void IncreaseBy10(ref double a,ref double b,ref double c)
+        static private void IncreaseBy10(ref double a,ref double b,ref double c)
         {
             a += 10;
             b += 10;
             c += 10;
         }
 
-        static void GetCicleSquareAndPerim(double radius,out double square,out double length)
+        static private void GetCicleSquareAndPerim(double radius,out double square,out double length)
         {
             square = Math.PI * Math.Pow(radius, 2);
             length = 2 * Math.PI * radius;
         }
 
-        static void MethodsForArr(double[]arr,out double max,out double min,out double sum)
+        static private void MethodsForArr(double[]arr,out double max,out double min,out double sum)
         {
             max = arr.Max();
             min = arr.Min();
             sum = arr.Sum();
+        }
+
+        private const int lowerLimit1 = 1;
+
+        static private double ReadWithCheckDouble()
+        {
+            bool check = double.TryParse(Console.ReadLine(), out double el);
+            while (!check)
+            {
+                Console.WriteLine("Некорректно, еще раз");
+                check = double.TryParse(Console.ReadLine(), out el);
+            }
+            return el;
+        }
+
+        static private int ReadWithCheckInt(int lowerLimit)
+        {
+            bool check = false;
+            int result = 0;
+            while (!check)
+            {
+                check = int.TryParse(Console.ReadLine(), out result);
+                if (check == false || result < lowerLimit)
+                {
+                    Console.WriteLine("Некорректно, еще раз");
+                    check = false;
+                }
+            }
+            return result;
         }
 
         static void Main(string[] args)
@@ -32,37 +61,16 @@ namespace Module_4_Task_3
             Console.WriteLine("Вводим переменные для пункта A:");
             for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine($"Вводите {i + 1} переменную.");
-                check = double.TryParse(Console.ReadLine(), out double el);
-                while (!check)
-                {
-                    Console.WriteLine("Некорректно, еще раз");
-                    check = double.TryParse(Console.ReadLine(), out el);
-                }
-                arrParam[i] = el;
+                Console.WriteLine($"Вводите {i + 1}-ую из 3 перменных");
+                arrParam[i] = ReadWithCheckDouble();
             }
 
 
             Console.WriteLine("Вводите радиус для пункта Б:");
-            check = double.TryParse(Console.ReadLine(), out double radius);
-            while (!check)
-            {
-                Console.WriteLine("Некорректно, еще раз");
-                check = double.TryParse(Console.ReadLine(), out radius);
-            }
+            double radius = ReadWithCheckDouble();
 
             Console.WriteLine("Введите размер одномерного массива для пункта С");
-            int arrSize = 0;
-            check = false;
-            while (!check)
-            {
-                check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize <= 0)
-                {
-                    check = false;
-                    Console.WriteLine("Некорректно, еще раз");
-                }
-            }
+            int arrSize = ReadWithCheckInt(lowerLimit1);
 
             Console.WriteLine("Заполнить массив рандомными числами от -50 до 51 " +
                 "(не включая 51) типа double? Вводите y/n");
@@ -99,15 +107,8 @@ namespace Module_4_Task_3
                 Console.WriteLine($"Заполняем вручную:");
                 for (int i = 0; i < arrSize; i++)
                 {
-                    double el;
-                    Console.WriteLine($"Вводите {i + 1} эл. массива");
-                    check = double.TryParse(Console.ReadLine(), out el);
-                    while (!check)
-                    {
-                        Console.WriteLine("Некорректно, еще раз");
-                        check = double.TryParse(Console.ReadLine(), out el);
-                    }
-                    arr[i] = el;
+                    Console.WriteLine($"Вводите {i + 1} эл. масива");
+                    arr[i] = ReadWithCheckDouble();
                 }
             }
 

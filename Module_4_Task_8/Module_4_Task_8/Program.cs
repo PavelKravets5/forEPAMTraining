@@ -21,7 +21,7 @@ namespace Module_4_Task_8
         }
 
         #region ByRecursion
-        static void SolutionEqualizationRec(double[] coef, double[] interv, double acc)
+        static private void SolutionEqualizationRec(double[] coef, double[] interv, double acc)
         {
             //Все таки решил сделать одинарную точность
             if (acc >= Math.Abs(interv[1] - interv[0]))
@@ -31,7 +31,7 @@ namespace Module_4_Task_8
             else
             {
                 double middle = (interv[0] + interv[1]) / 2;
-                if (Function(coef, interv[0]) * Function(coef, middle) < 0)
+                if (GetFunction(coef, interv[0]) * GetFunction(coef, middle) < 0)
                 {
                     interv[1] = middle;
                 }
@@ -43,7 +43,7 @@ namespace Module_4_Task_8
             }
         }
 
-        static void SolutionEqualizationRec(double[] coef, double[] interv, double acc,out bool success)
+        static private void SolutionEqualizationRec(double[] coef, double[] interv, double acc,out bool success)
         {
             success = false;
             //Я решил, что проверка правильности интервала должна быть первична
@@ -71,7 +71,7 @@ namespace Module_4_Task_8
         #endregion ByRecursion
 
         #region ByCicle
-        static void SolutionEqualizationCicle(double[] coef, double[] interv, double acc,out bool success)
+        static private void SolutionEqualizationCicle(double[] coef, double[] interv, double acc,out bool success)
         {
             success = false;
             
@@ -95,6 +95,35 @@ namespace Module_4_Task_8
         }
         #endregion ByCicle
 
+        private const int lowerLimit1 = 1;
+
+        static private double ReadWithCheckDouble()
+        {
+            bool check = double.TryParse(Console.ReadLine(), out double el);
+            while (!check)
+            {
+                Console.WriteLine("Некорректно, еще раз");
+                check = double.TryParse(Console.ReadLine(), out el);
+            }
+            return el;
+        }
+
+        static private int ReadWithCheckInt(int lowerLimit)
+        {
+            bool check = false;
+            int result = 0;
+            while (!check)
+            {
+                check = int.TryParse(Console.ReadLine(), out result);
+                if (check == false || result < lowerLimit)
+                {
+                    Console.WriteLine("Некорректно, еще раз");
+                    check = false;
+                }
+            }
+            return result;
+        }
+
         static void Main(string[] args)
         {
             //Я в Модуле_3_Задании_8 Уже сделал решение ур. делением по полам рекурсией
@@ -104,29 +133,13 @@ namespace Module_4_Task_8
             Console.WriteLine("Решаем многочлен с 1 неизвестным \n" +
                 "Введите кол-во коэффициентов (равное n) при неизвестных x^n + ... + x^0");
 
-            int arrSize = 0;
-            bool check = false;
-            while (!check)
-            {
-                check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize <= 0)
-                {
-                    check = false;
-                    Console.WriteLine("Некорректно, еще раз");
-                }
-            }
+            int arrSize = ReadWithCheckInt(lowerLimit1);
             double[] coef = new double[arrSize];
             for (int i = 0; i < arrSize; i++)
             {
 
                 Console.WriteLine($"Вводите {i + 1} коэффициент, от старшей степени к нулевой");
-                check = double.TryParse(Console.ReadLine(), out double el);
-                while (!check)
-                {
-                    Console.WriteLine("Некорректно, еще раз");
-                    check = double.TryParse(Console.ReadLine(), out el);
-                }
-                coef[i] = el;
+                coef[i] = ReadWithCheckDouble();
             }
 
             double[] interval = new double[2];
@@ -134,23 +147,11 @@ namespace Module_4_Task_8
             {
 
                 Console.WriteLine($"Вводите {i + 1} из 2 значений интервала");
-                check = double.TryParse(Console.ReadLine(), out double el) ;
-                while (!check)
-                {
-                    Console.WriteLine("Некорректно, еще раз");
-                    check = double.TryParse(Console.ReadLine(), out el);
-                }
-                interval[i] = el;
+                interval[i] = ReadWithCheckDouble();
             }
 
             Console.WriteLine("Введите точность");
-            double acc;
-            check = double.TryParse(Console.ReadLine(), out acc);
-            while (!check)
-            {
-                Console.WriteLine("Некорректно, еще раз");
-                check = double.TryParse(Console.ReadLine(), out acc);
-            }
+            double acc = ReadWithCheckDouble();
 
             double[] temp = CopyArr(interval);
             SolutionEqualizationRec(coef, temp, acc, out bool success);

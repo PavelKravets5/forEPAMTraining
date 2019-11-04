@@ -5,7 +5,7 @@ namespace Module_4_Task_1
 {
     class Program
     {
-        static int GetMaxEl(int[]arr)
+        static private int GetMaxEl(int[]arr)
         {
             int max = arr[0];
             foreach (int el in arr)
@@ -18,7 +18,7 @@ namespace Module_4_Task_1
             return max;
         }
 
-        static int GetMinEl(int[]arr)
+        static private int GetMinEl(int[]arr)
         {
             int min = arr[0];
             foreach(int el in arr)
@@ -31,7 +31,7 @@ namespace Module_4_Task_1
             return min;
         }
 
-        static int GetSum(int[]arr)
+        static private int GetSum(int[]arr)
         {
             int sum = 0;
             foreach(int el in arr)
@@ -41,7 +41,7 @@ namespace Module_4_Task_1
             return sum;
         }
 
-        static void TransformArr(int []arr)
+        static private void TransformArr(int []arr)
         {
             int max = GetMaxEl(arr);
             int min = GetMinEl(arr);
@@ -58,32 +58,32 @@ namespace Module_4_Task_1
             }
         }
 
-        static int DifferenceBetweenMinMax(int[]arr)
+        static private int DifferenceBetweenMinMax(int[]arr)
         {
             return GetMaxEl(arr) - GetMinEl(arr);
         }
 
-        static int GetSumByLinq(int[]arr)
+        static private int GetSumByLinq(int[]arr)
         {
             return arr.Sum();
         }
 
-        static int GetMaxElByLinq(int[] arr)
+        static private int GetMaxElByLinq(int[] arr)
         {
             return arr.Max();
         }
 
-        static int GetMinElByLinq(int[] arr)
+        static private int GetMinElByLinq(int[] arr)
         {
             return arr.Min();
         }
 
-        static int DifferenceBetweenMinMaxByLinq(int[]arr)
+        static private int DifferenceBetweenMinMaxByLinq(int[]arr)
         {
             return arr.Max() - arr.Min();
         }
 
-        static int[] TransformArrByLinq(int []arr)
+        static private int[] TransformArrByLinq(int []arr)
         {
             int max = arr.Max();
             int min = arr.Min();
@@ -92,33 +92,54 @@ namespace Module_4_Task_1
                 .Concat(from el in temp where el % 2 != 0 select el - min).ToArray();
         }
 
-        static int[] CopyArrByLinq(int[]arr)
+        static private int[] CopyArrByLinq(int[]arr)
         {
             return arr.Select(el => el).ToArray();
+        }
+
+        private const int lowerLimit1 = 1;
+
+        static private int ReadWithCheckInt()
+        {
+            bool check = false;
+            int result = 0;
+            while (!check)
+            {
+                check = int.TryParse(Console.ReadLine(), out result);
+                if (check == false)
+                {
+                    Console.WriteLine("Некорректно, еще раз");
+                    check = false;
+                }
+            }
+            return result;
+        }
+
+        static private int ReadWithCheckInt(int lowerLimit)
+        {
+            bool check = false;
+            int result = 0;
+            while (!check)
+            {
+                check = int.TryParse(Console.ReadLine(), out result);
+                if (check == false || result < lowerLimit)
+                {
+                    Console.WriteLine("Некорректно, еще раз");
+                    check = false;
+                }
+            }
+            return result;
         }
 
         static void Main(string[] args)
         {
             Console.WriteLine("Введите размер одномерного массива");
-            int arrSize = 0;
-            bool check = false;
-            while (!check)
-            {
-                check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize <= 0)
-                {
-                    check = false;
-                    Console.WriteLine("Некорректно, еще раз");
-                }
-            }
+            int arrSize = ReadWithCheckInt(lowerLimit1);
 
-            //пункт Д: создать метод чтобы 
-            //"Увеличить четные элементы массива на максимальный элемент, 
-            //нечётные уменьшить на минимальный элемент.", 
-            //я , что раз речь идет о четности/ нечетности, массив заполнен только целыми числами?
+           
             Console.WriteLine("Заполнить массив рандомными числами от -50 до 51 " +
                 "(не включая 51) типа int? Вводите y/n");
-            check = false;
+            bool check = false;
             string ans = null;
             while (!check)
             {
@@ -152,13 +173,7 @@ namespace Module_4_Task_1
                 for (int i = 0; i < arrSize; i++)
                 {
                     Console.WriteLine($"Вводите {i + 1} эл. массива");
-                    check = int.TryParse(Console.ReadLine(), out int el);
-                    while (!check)
-                    {
-                        Console.WriteLine("Некорректно, еще раз");
-                        check = int.TryParse(Console.ReadLine(), out el);
-                    }
-                    arr[i] = el;
+                    arr[i] = ReadWithCheckInt();
                 }
             }
 

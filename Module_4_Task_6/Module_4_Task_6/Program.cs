@@ -4,31 +4,51 @@ namespace Module_4_Task_6
 {
     class Program
     {
-        static void IncreaseBy5(double[]arr)
+        static private void IncreaseBy5(double[]arr)
         {
             for(int i=0;i<arr.Length;i++)
             {
                 arr[i] += 5;
             }
         }
+
+        private const int lowerLimit1 = 1;
+
+        static private double ReadWithCheckDouble()
+        {
+            bool check = double.TryParse(Console.ReadLine(), out double el);
+            while (!check)
+            {
+                Console.WriteLine("Некорректно, еще раз");
+                check = double.TryParse(Console.ReadLine(), out el);
+            }
+            return el;
+        }
+
+        static private int ReadWithCheckInt(int lowerLimit)
+        {
+            bool check = false;
+            int result = 0;
+            while (!check)
+            {
+                check = int.TryParse(Console.ReadLine(), out result);
+                if (check == false || result < lowerLimit)
+                {
+                    Console.WriteLine("Некорректно, еще раз");
+                    check = false;
+                }
+            }
+            return result;
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Введите размер одномерного массива");
-            int arrSize = 0;
-            bool check = false;
-            while (!check)
-            {
-                check = int.TryParse(Console.ReadLine(), out arrSize);
-                if (check == false || arrSize <= 0)
-                {
-                    check = false;
-                    Console.WriteLine("Некорректно, еще раз");
-                }
-            }
+            int arrSize = ReadWithCheckInt(lowerLimit1);
 
             Console.WriteLine("Заполнить массив рандомными числами от -50 до 51 " +
                 "(не включая 51) типа double? Вводите y/n");
-            check = false;
+            bool check = false;
             string ans = null;
             while (!check)
             {
@@ -61,14 +81,8 @@ namespace Module_4_Task_6
                 Console.WriteLine($"Заполняем вручную:");
                 for (int i = 0; i < arrSize; i++)
                 {
-                    Console.WriteLine($"Вводите {i + 1} эл. массива");
-                    check = double.TryParse(Console.ReadLine(), out double el);
-                    while (!check)
-                    {
-                        Console.WriteLine("Некорректно, еще раз");
-                        check = double.TryParse(Console.ReadLine(), out el);
-                    }
-                    arr[i] = el;
+                    Console.WriteLine($"Вводите {i + 1} эл. масива");
+                    arr[i] = ReadWithCheckDouble();
                 }
             }
 

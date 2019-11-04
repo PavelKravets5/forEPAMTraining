@@ -4,12 +4,14 @@ namespace Module_4_Task_2
 {
     class Program
     {
-        enum Types
+        private enum Types
         {
             intNums=1,
             doubleNums=2,
             two_strings=3
         }
+
+        private const int lowerLimit1 = 1;
 
         static private int Summation(int a, int b)
         {
@@ -79,6 +81,22 @@ namespace Module_4_Task_2
             return el;
         }
 
+        static private int ReadWithCheckInt(int lowerLimit)
+        {
+            bool check = false;
+            int result = 0;
+            while (!check)
+            {
+                check = int.TryParse(Console.ReadLine(), out result);
+                if (check == false || result < lowerLimit)
+                {
+                    Console.WriteLine("Некорректно, еще раз");
+                    check = false;
+                }
+            }
+            return result;
+        }
+
         static void Main(string[] args)
         {
             int[] arrInt = new int[3];
@@ -122,17 +140,7 @@ namespace Module_4_Task_2
             for(int j=0; j<2;j++)
             {
                 Console.WriteLine($"Ввелите длинну {j+1} массива:");
-                int arrSize = 0;
-                bool check = false;
-                while (!check)
-                {
-                    check = int.TryParse(Console.ReadLine(), out arrSize);
-                    if (check == false || arrSize <= 0)
-                    {
-                        check = false;
-                        Console.WriteLine("Некорректно, еще раз");
-                    }
-                }
+                int arrSize = ReadWithCheckInt(lowerLimit1);
                 twoArr[j] = new double[arrSize];
                 for (int i = 0; i < arrSize; i++)
                 {
