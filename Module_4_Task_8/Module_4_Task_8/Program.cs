@@ -95,7 +95,7 @@ namespace Module_4_Task_8
         }
         #endregion ByCicle
 
-        private const int lowerLimit1 = 1;
+        private const int limit0 = 0;
 
         static private double ReadWithCheckDouble()
         {
@@ -131,50 +131,59 @@ namespace Module_4_Task_8
             //так что, я сделал методы и через рекурсию (отшлифованный вариант) и через циклы
 
             Console.WriteLine("Решаем многочлен с 1 неизвестным \n" +
-                "Введите кол-во коэффициентов (равное n) при неизвестных x^n + ... + x^0");
+                "Введите старшую степень (равную n) при неизвестных x^n + ... + x^0, n>=0");
 
-            int arrSize = ReadWithCheckInt(lowerLimit1);
+            int arrSize = ReadWithCheckInt(limit0) + 1;
             double[] coef = new double[arrSize];
             for (int i = 0; i < arrSize; i++)
             {
 
-                Console.WriteLine($"Вводите {i + 1} коэффициент, от старшей степени к нулевой");
+                Console.WriteLine($"Вводите коэффициент при степени {arrSize - i - 1}, от старшей степени к нулевой");
                 coef[i] = ReadWithCheckDouble();
             }
 
-            double[] interval = new double[2];
-            for (int i = 0; i < 2; i++)
+            if (arrSize > 1)
             {
+                double[] interval = new double[2];
+                for (int i = 0; i < 2; i++)
+                {
 
-                Console.WriteLine($"Вводите {i + 1} из 2 значений интервала");
-                interval[i] = ReadWithCheckDouble();
-            }
+                    Console.WriteLine($"Вводите {i + 1} из 2 значений интервала");
+                    interval[i] = ReadWithCheckDouble();
+                }
 
-            Console.WriteLine("Введите точность");
-            double acc = ReadWithCheckDouble();
+                Console.WriteLine("Введите точность");
+                double acc = ReadWithCheckDouble();
 
-            double[] temp = CopyArr(interval);
-            SolutionEqualizationRec(coef, temp, acc, out bool success);
-            if(success)
-            {
-                Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +
-                    $"- найдено через рекурсию");
+
+                double[] temp = CopyArr(interval);
+                SolutionEqualizationRec(coef, temp, acc, out bool success);
+                if (success)
+                {
+                    Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +
+                        $"- найдено через рекурсию");
+                }
+                else
+                {
+                    Console.WriteLine("На д. интервале нет корней - найдено через рекурсию");
+                }
+
+                temp = CopyArr(interval);
+                SolutionEqualizationCicle(coef, temp, acc, out success);
+                if (success)
+                {
+                    Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +
+                        $"- найдено через цикл");
+                }
+                else
+                {
+                    Console.WriteLine("На д. интервале нет корней - найдено через цикл");
+                }
             }
             else
             {
-                Console.WriteLine("На д. интервале нет корней - найдено через рекурсию");
-            }
-
-            temp = CopyArr(interval);
-            SolutionEqualizationCicle(coef, temp, acc,out success);
-            if (success)
-            {
-                Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +
-                    $"- найдено через цикл");
-            }
-            else
-            {
-                Console.WriteLine("На д. интервале нет корней - найдено через цикл");
+                Console.WriteLine($"При старшей степени 0 - на любом интервале график функции - " +
+                    $"прямая, паралельная оси Х с координатой Y={coef[0]}.");
             }
         }
     }
