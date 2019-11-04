@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Module_4_Task_2
 {
@@ -11,7 +12,7 @@ namespace Module_4_Task_2
             two_strings=3
         }
 
-        private const int lowerLimit1 = 1;
+        private const int limit1 = 1;
 
         static private int Summation(int a, int b)
         {
@@ -54,20 +55,25 @@ namespace Module_4_Task_2
             return c;
         }
 
-        //Эту программу я делаю последней в модуле 4, я долго думал как убрать или уменьшить
-        //длиннющие
-        //полотнища кода, где ввожу данные, проверяю корректность ввода, корректность ограничений,
-        //лишь бы вынося Console.WriteLine(), Console.ReadLine() за пределы метода Main
-        //Я так и не придумал, и сделал так:
         static private double ReadWithCheckDouble()
         {
-            bool check = double.TryParse(Console.ReadLine(), out double el);
+            bool check = false;
+            double num = 0;
             while (!check)
             {
-                Console.WriteLine("Некорректно, еще раз");
-                check = double.TryParse(Console.ReadLine(), out el);
+                string str = Console.ReadLine();
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                if (!check)
+                {
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    if (!check)
+                    {
+                        Console.WriteLine("Некорректно, еще раз");
+
+                    }
+                }
             }
-            return el;
+            return num;
         }
 
         static private int ReadWithCheckInt()
@@ -140,7 +146,7 @@ namespace Module_4_Task_2
             for(int j=0; j<2;j++)
             {
                 Console.WriteLine($"Ввелите длинну {j+1} массива:");
-                int arrSize = ReadWithCheckInt(lowerLimit1);
+                int arrSize = ReadWithCheckInt(limit1);
                 twoArr[j] = new double[arrSize];
                 for (int i = 0; i < arrSize; i++)
                 {

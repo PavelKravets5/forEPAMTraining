@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Module_4_Task_5
 {
@@ -14,20 +15,30 @@ namespace Module_4_Task_5
             September=9, October=10, November=11, December=12
         }
 
-        private const int upperLimit5 = 5;
-        private const int upperLimit12 = 12;
+        private const int limit5 = 5;
+        private const int limit12 = 12;
 
-        private const int lowerLimit1 = 1;
+        private const int limit1 = 1;
 
         static private double ReadWithCheckDouble()
         {
-            bool check = double.TryParse(Console.ReadLine(), out double el);
+            bool check = false;
+            double num = 0;
             while (!check)
             {
-                Console.WriteLine("Некорректно, еще раз");
-                check = double.TryParse(Console.ReadLine(), out el);
+                string str = Console.ReadLine();
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                if (!check)
+                {
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    if (!check)
+                    {
+                        Console.WriteLine("Некорректно, еще раз");
+
+                    }
+                }
             }
-            return el;
+            return num;
         }
 
         static private int ReadWithCheckInt(int lowerLimit,int upperLimit)
@@ -62,7 +73,7 @@ namespace Module_4_Task_5
                 "нажмите 3 для умножения\n" +
                 "нажмите 4 для деления (первое/второе)\n" +
                 "нажмите 5 для возведения в степень (первое^второе)");
-            int ans = ReadWithCheckInt(lowerLimit1,upperLimit5);
+            int ans = ReadWithCheckInt(limit1,limit5);
             Operations op = (Operations)ans;
             Console.WriteLine($"Результат мат. операции {op} = {Operation(nums[0],nums[1], op):f2}");
 
@@ -75,7 +86,7 @@ namespace Module_4_Task_5
             {
                 str = Console.ReadLine();
                 check = int.TryParse(str, out ans);
-                if (!check || ans < lowerLimit1 || ans > upperLimit12)
+                if (!check || ans < limit1 || ans > limit12)
                 {
                     check = false;
                     if (str.Length >= 3)

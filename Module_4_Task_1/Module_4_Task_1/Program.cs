@@ -97,8 +97,13 @@ namespace Module_4_Task_1
             return arr.Select(el => el).ToArray();
         }
 
-        private const int lowerLimit1 = 1;
+        private const int limit1 = 1;
 
+        //Я долго думал как убрать или уменьшить
+        //длиннющие
+        //полотнища кода, где ввожу данные, проверяю корректность ввода, корректность ограничений,
+        //лишь бы вынося Console.WriteLine(), Console.ReadLine() за пределы метода Main
+        //Я так и не придумал, и сделал так (здесь и далее):
         static private int ReadWithCheckInt()
         {
             bool check = false;
@@ -134,7 +139,7 @@ namespace Module_4_Task_1
         static void Main(string[] args)
         {
             Console.WriteLine("Введите размер одномерного массива");
-            int arrSize = ReadWithCheckInt(lowerLimit1);
+            int arrSize = ReadWithCheckInt(limit1);
 
            
             Console.WriteLine("Заполнить массив рандомными числами от -50 до 51 " +

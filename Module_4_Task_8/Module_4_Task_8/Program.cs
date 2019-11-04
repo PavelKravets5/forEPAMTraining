@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Globalization;
 
 namespace Module_4_Task_8
 {
@@ -23,7 +24,7 @@ namespace Module_4_Task_8
         #region ByRecursion
         static private void SolutionEqualizationRec(double[] coef, double[] interv, double acc)
         {
-            //Все таки решил сделать одинарную точность
+            //Все-таки решил сделать одинарную точность
             if (acc >= Math.Abs(interv[1] - interv[0]))
             {
                 return;
@@ -55,7 +56,7 @@ namespace Module_4_Task_8
             else
             {
                 success = true;
-                //Все таки решил сделать одинарную точность
+                //Все-таки решил сделать одинарную точность
                 if (acc >= Math.Abs(interv[1] - interv[0]))
                 {
                     
@@ -78,7 +79,7 @@ namespace Module_4_Task_8
             if (GetFunction(coef, interv[0]) * GetFunction(coef, interv[1]) <= 0)
             {
                 success = true;
-                //Все таки решил сделать одинарную точность
+                //Все-таки решил сделать одинарную точность
                 while (acc < Math.Abs(interv[1] - interv[0]))
                 {
                     double middle = (interv[0] + interv[1]) / 2;
@@ -99,13 +100,23 @@ namespace Module_4_Task_8
 
         static private double ReadWithCheckDouble()
         {
-            bool check = double.TryParse(Console.ReadLine(), out double el);
+            bool check = false;
+            double num = 0;
             while (!check)
             {
-                Console.WriteLine("Некорректно, еще раз");
-                check = double.TryParse(Console.ReadLine(), out el);
+                string str = Console.ReadLine();
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                if (!check)
+                {
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    if (!check)
+                    {
+                        Console.WriteLine("Некорректно, еще раз");
+
+                    }
+                }
             }
-            return el;
+            return num;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -182,7 +193,7 @@ namespace Module_4_Task_8
             }
             else
             {
-                Console.WriteLine($"При старшей степени 0 - на любом интервале график функции - " +
+                Console.WriteLine($"При старшей степени = 0 - на любом интервале график функции - " +
                     $"прямая, паралельная оси Х с координатой Y={coef[0]}.");
             }
         }

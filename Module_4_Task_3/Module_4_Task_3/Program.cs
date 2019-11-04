@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Globalization;
 
 namespace Module_4_Task_3
 {
@@ -25,17 +26,27 @@ namespace Module_4_Task_3
             sum = arr.Sum();
         }
 
-        private const int lowerLimit1 = 1;
+        private const int limit1 = 1;
 
         static private double ReadWithCheckDouble()
         {
-            bool check = double.TryParse(Console.ReadLine(), out double el);
+            bool check = false;
+            double num = 0;
             while (!check)
             {
-                Console.WriteLine("Некорректно, еще раз");
-                check = double.TryParse(Console.ReadLine(), out el);
+                string str = Console.ReadLine();
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                if (!check)
+                {
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    if (!check)
+                    {
+                        Console.WriteLine("Некорректно, еще раз");
+
+                    }
+                }
             }
-            return el;
+            return num;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -70,7 +81,7 @@ namespace Module_4_Task_3
             double radius = ReadWithCheckDouble();
 
             Console.WriteLine("Введите размер одномерного массива для пункта С");
-            int arrSize = ReadWithCheckInt(lowerLimit1);
+            int arrSize = ReadWithCheckInt(limit1);
 
             Console.WriteLine("Заполнить массив рандомными числами от -50 до 51 " +
                 "(не включая 51) типа double? Вводите y/n");
