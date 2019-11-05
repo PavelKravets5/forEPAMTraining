@@ -14,27 +14,27 @@ namespace Module_4_Task_2
 
         private const int limit1 = 1;
 
-        static private int Summation(int a, int b)
+        static private int GetSumm(int a, int b)
         {
             return a + b;
         }
 
-        static private int Summation(int a, int b,int c)
+        static private int GetSumm(int a, int b,int c)
         {
             return a + b+c;
         }
 
-        static private double Summation(double a, double b,double c)
+        static private double GetSumm(double a, double b,double c)
         {
             return a + b+c;
         }
 
-        static private string Summation(string a, string b)
+        static private string GetSumm(string a, string b)
         {
             return a + b;
         }
 
-        static private double[] Summation(double[]a, double[]b)
+        static private double[] GetSumm(double[]a, double[]b)
         {
             double[] c = null;
             if (a.Length < b.Length)
@@ -58,14 +58,14 @@ namespace Module_4_Task_2
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -73,18 +73,18 @@ namespace Module_4_Task_2
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt()
         {
-            bool check = int.TryParse(Console.ReadLine(), out int el);
+            bool check = int.TryParse(Console.ReadLine(), out int result);
             while (!check)
             {
                 Console.WriteLine("Некорректно, еще раз");
-                check = int.TryParse(Console.ReadLine(), out el);
+                check = int.TryParse(Console.ReadLine(), out result);
             }
-            return el;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -112,7 +112,7 @@ namespace Module_4_Task_2
                 Console.WriteLine($"Вводите {i+1} целое число из 3");
                 arrInt[i] = ReadWithCheckInt();
             }
-            Console.WriteLine($"Пункт А. Суммирование = {Summation(arrInt[0], arrInt[1], arrInt[2])}");
+            Console.WriteLine($"Пункт А. Суммирование = {GetSumm(arrInt[0], arrInt[1], arrInt[2])}");
 
             arrInt = new int[2];
             Console.WriteLine("Пункт Б.");
@@ -121,7 +121,7 @@ namespace Module_4_Task_2
                 Console.WriteLine($"Вводите {i + 1} целое число из 2");
                 arrInt[i] = ReadWithCheckInt();
             }
-            Console.WriteLine($"Пункт Б. Суммирование = {Summation(arrInt[0], arrInt[1])}");
+            Console.WriteLine($"Пункт Б. Суммирование = {GetSumm(arrInt[0], arrInt[1])}");
 
             double []arrDouble = new double[3];
             Console.WriteLine("Пункт В.");
@@ -130,7 +130,7 @@ namespace Module_4_Task_2
                 Console.WriteLine($"Вводите {i + 1} дробное число из 3");
                 arrDouble[i] = ReadWithCheckDouble();
             }
-            Console.WriteLine($"Пункт В. Суммирование = {Summation(arrDouble[0], arrDouble[1], arrDouble[2]):f2}");
+            Console.WriteLine($"Пункт В. Суммирование = {GetSumm(arrDouble[0], arrDouble[1], arrDouble[2]):f2}");
 
             string[] arrStr = new string[2];
             Console.WriteLine("Пункт Г.");
@@ -139,7 +139,7 @@ namespace Module_4_Task_2
                 Console.WriteLine($"Вводите {i + 1} строку из 2");
                 arrStr[i] = Console.ReadLine();
             }
-            Console.WriteLine($"Пункт Г. Суммирование = {Summation(arrStr[0], arrStr[1])}");
+            Console.WriteLine($"Пункт Г. Суммирование = {GetSumm(arrStr[0], arrStr[1])}");
 
             Console.WriteLine("Пункт Д.");
             double[][] twoArr = new double[2][];
@@ -155,7 +155,7 @@ namespace Module_4_Task_2
                 }
             }
             Console.WriteLine("Пункт Д. Суммирование:");
-            double[] arrResult = Summation(twoArr[0], twoArr[1]);
+            double[] arrResult = GetSumm(twoArr[0], twoArr[1]);
             for(int i=0;i<arrResult.Length;i++)
             {
                 Console.Write($"{arrResult[i]:f2}, ");

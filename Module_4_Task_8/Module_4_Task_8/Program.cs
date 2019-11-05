@@ -6,6 +6,8 @@ namespace Module_4_Task_8
 {
     class Program
     {
+        private const int limit0 = 0;
+
         static double GetFunction(double[] coef, double arg)
         {
             double func = 0;
@@ -16,13 +18,13 @@ namespace Module_4_Task_8
             return func;
         }
 
-        static double[] CopyArr(double []arr)
+        static double[] GetCopyArr(double []arr)
         {
             return arr.Select(x => x).ToArray();
         }
 
         #region ByRecursion
-        static private void SolutionEqualizationRec(double[] coef, double[] interv, double acc)
+        static private void DoSolutionEqualizationRec(double[] coef, double[] interv, double acc)
         {
             //Все-таки решил сделать одинарную точность
             if (acc >= Math.Abs(interv[1] - interv[0]))
@@ -40,11 +42,11 @@ namespace Module_4_Task_8
                 {
                     interv[0] = middle;
                 }
-                SolutionEqualizationRec(coef, interv, acc);
+                DoSolutionEqualizationRec(coef, interv, acc);
             }
         }
 
-        static private void SolutionEqualizationRec(double[] coef, double[] interv, double acc,out bool success)
+        static private void DoSolutionEqualizationRec(double[] coef, double[] interv, double acc,out bool success)
         {
             success = false;
             //Я решил, что проверка правильности интервала должна быть первична
@@ -64,7 +66,7 @@ namespace Module_4_Task_8
                 }
                 else
                 {
-                    SolutionEqualizationRec(coef, interv, acc);
+                    DoSolutionEqualizationRec(coef, interv, acc);
                     return;
                 }
             }
@@ -72,7 +74,7 @@ namespace Module_4_Task_8
         #endregion ByRecursion
 
         #region ByCicle
-        static private void SolutionEqualizationCicle(double[] coef, double[] interv, double acc,out bool success)
+        static private void DoSolutionEqualizationCicle(double[] coef, double[] interv, double acc,out bool success)
         {
             success = false;
             
@@ -96,19 +98,17 @@ namespace Module_4_Task_8
         }
         #endregion ByCicle
 
-        private const int limit0 = 0;
-
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -116,7 +116,7 @@ namespace Module_4_Task_8
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -167,8 +167,8 @@ namespace Module_4_Task_8
                 double acc = ReadWithCheckDouble();
 
 
-                double[] temp = CopyArr(interval);
-                SolutionEqualizationRec(coef, temp, acc, out bool success);
+                double[] temp = GetCopyArr(interval);
+                DoSolutionEqualizationRec(coef, temp, acc, out bool success);
                 if (success)
                 {
                     Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +
@@ -179,8 +179,8 @@ namespace Module_4_Task_8
                     Console.WriteLine("На д. интервале нет корней - найдено через рекурсию");
                 }
 
-                temp = CopyArr(interval);
-                SolutionEqualizationCicle(coef, temp, acc, out success);
+                temp = GetCopyArr(interval);
+                DoSolutionEqualizationCicle(coef, temp, acc, out success);
                 if (success)
                 {
                     Console.WriteLine($"Искомые корни находятся на интервале: [{temp[0]:f4}, {temp[1]:f4}] " +

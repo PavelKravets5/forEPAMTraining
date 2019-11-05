@@ -6,6 +6,8 @@ namespace Module_4_Task_4
 {
     class Program
     {
+        private const int limit1 = 1;
+        
         //Проверка показала, что кортежи не являются ссылочным типом
         static private void IncreaseBy10(ref(double a,double b,double c) tuple)
         {
@@ -21,26 +23,25 @@ namespace Module_4_Task_4
             tuple.length = 2 * Math.PI * radius;
         }
 
-        static private void MethodsForArr(double[] arr,out (double max, double min, double sum) tuple)
+        //Не придумал как назвать метод, где вычесляется мин., макс. эл., и сумма
+        static private void MethodForArr(double[] arr,out (double max, double min, double sum) tuple)
         {
             tuple.max = arr.Max();
             tuple.min = arr.Min();
             tuple.sum = arr.Sum();
         }
 
-        private const int limit1 = 1;
-
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -48,7 +49,7 @@ namespace Module_4_Task_4
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -128,7 +129,7 @@ namespace Module_4_Task_4
             IncreaseBy10(ref tupleA);
 
             GetCicleSquareAndPerim(radius, out var CircleProp);
-            MethodsForArr(arr, out var ArrProp);
+            MethodForArr(arr, out var ArrProp);
             Console.WriteLine($"\n\nЗаполнено.\n\n" +
                 $"Три введенных числа увеличены на 10: " +
                 $"{tupleA.Item1:f2}, {tupleA.Item2:f2}, {tupleA.Item3:f2}\n" +

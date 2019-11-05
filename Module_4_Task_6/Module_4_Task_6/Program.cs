@@ -5,6 +5,8 @@ namespace Module_4_Task_6
 {
     class Program
     {
+        private const int limit1 = 1;
+
         static private void IncreaseBy5(double[]arr)
         {
             for(int i=0;i<arr.Length;i++)
@@ -13,19 +15,17 @@ namespace Module_4_Task_6
             }
         }
 
-        private const int limit1 = 1;
-
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -33,7 +33,7 @@ namespace Module_4_Task_6
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)

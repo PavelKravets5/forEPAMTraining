@@ -6,12 +6,14 @@ namespace Module_4_Task_7
 {
     class Program
     {
+        private const int limit1 = 1;
+
         static private double[] CopyArr(double[]arr)
         {
             return arr.Select(x => x).ToArray();
         }
 
-        static private double[] MySortByLinq(double[]arr,bool direction)
+        static private double[] DoMySortByLinq(double[]arr,bool direction)
         {
             if(direction)
             {
@@ -23,7 +25,7 @@ namespace Module_4_Task_7
             }
         }
 
-        static private double[] MySortByComparer(double[]arr,bool direction)
+        static private double[] DoMySortByComparer(double[]arr,bool direction)
         {
             Array.Sort(arr, new MyComparer());
             if (!direction)
@@ -40,7 +42,7 @@ namespace Module_4_Task_7
             b = temp;
         }
 
-        static private int Partition(double[] arr,bool direction, int startIndex, int endIndex)
+        static private int GetPartition(double[] arr,bool direction, int startIndex, int endIndex)
         {
             int marker = startIndex;
             for (int i = startIndex; i <= endIndex; i++)
@@ -65,7 +67,7 @@ namespace Module_4_Task_7
             {
                 return ;
             }
-            int marker= Partition(arr, direction, startIndex, endIndex);
+            int marker= GetPartition(arr, direction, startIndex, endIndex);
             MyQuickSort(arr, direction,startIndex, marker - 1);
             MyQuickSort(arr, direction,marker + 1, endIndex);
             return ;
@@ -76,19 +78,17 @@ namespace Module_4_Task_7
             MyQuickSort(arr, direction,0, arr.Length - 1);
         }
 
-        private const int limit1 = 1;
-
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -96,7 +96,7 @@ namespace Module_4_Task_7
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -177,12 +177,12 @@ namespace Module_4_Task_7
             }
             //На трансляции по модулю 4, особо обсудили, что направление сортировки
             //в метод должно передоваться как bool. Хотя там даже со строкой будет работать 
-            //т.к. я контролирую знач. b ошибок не будет,
+            //т.к. я контролирую знач. и ошибок не будет,
             //но на трансляции сказоно было - именно bool
             bool direction=(ans=="y")?true:false;
 
             double[] temp = CopyArr(arr);
-            temp=MySortByLinq(temp,direction);
+            temp=DoMySortByLinq(temp,direction);
             Console.WriteLine("\nОтсортировано через Linq");
 
             foreach (double el in temp)
@@ -191,7 +191,7 @@ namespace Module_4_Task_7
             }
 
             temp = CopyArr(arr);
-            temp=MySortByComparer(temp, direction);
+            temp=DoMySortByComparer(temp, direction);
             Console.WriteLine("\n\nОтсортировано через с помощью IComparer<double> и Reverse()");
 
             foreach (double el in temp)

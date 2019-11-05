@@ -6,6 +6,8 @@ namespace Module_4_Task_3
 {
     class Program
     {
+        private const int limit1 = 1;
+
         static private void IncreaseBy10(ref double a,ref double b,ref double c)
         {
             a += 10;
@@ -19,26 +21,25 @@ namespace Module_4_Task_3
             length = 2 * Math.PI * radius;
         }
 
-        static private void MethodsForArr(double[]arr,out double max,out double min,out double sum)
+        //Не придумал как назвать метод, где вычесляется мин., макс. эл., и сумма
+        static private void MethodForArr(double[]arr,out double max,out double min,out double sum)
         {
             max = arr.Max();
             min = arr.Min();
             sum = arr.Sum();
         }
-
-        private const int limit1 = 1;
-
+        
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -46,7 +47,7 @@ namespace Module_4_Task_3
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit)
@@ -75,7 +76,6 @@ namespace Module_4_Task_3
                 Console.WriteLine($"Вводите {i + 1}-ую из 3 перменных");
                 arrParam[i] = ReadWithCheckDouble();
             }
-
 
             Console.WriteLine("Вводите радиус для пункта Б:");
             double radius = ReadWithCheckDouble();
@@ -125,7 +125,7 @@ namespace Module_4_Task_3
 
             IncreaseBy10(ref arrParam[0], ref arrParam[1], ref arrParam[2]);
             GetCicleSquareAndPerim(radius, out double square, out double length);
-            MethodsForArr(arr, out double max, out double min, out double sum);
+            MethodForArr(arr, out double max, out double min, out double sum);
             Console.WriteLine($"\n\nЗаполнено.\n\n" +
                 $"Три введенных числа увеличены на 10: " +
                 $"{arrParam[0]:f2}, {arrParam[1]:f2}, {arrParam[2]:f2}\n" +

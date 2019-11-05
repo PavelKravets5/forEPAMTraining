@@ -5,32 +5,48 @@ namespace Module_4_Task_5
 {
     class Program
     {
-        private enum Operations
-        {
-            add=1, subtract=2, multiply=3, divide=4, degree=5
-        }
-        private enum MonthNames
-        {
-            January=1, February=2, March=3, April=4, May=5, June=6, July=7, August=8,
-            September=9, October=10, November=11, December=12
-        }
-
         private const int limit5 = 5;
+
         private const int limit12 = 12;
 
         private const int limit1 = 1;
 
+        private enum Operations
+        {
+            add=1,
+            subtract =2,
+            multiply =3,
+            divide =4,
+            degree =5
+        }
+
+        private enum MonthNames
+        {
+            January=1,
+            February =2,
+            March =3,
+            April =4,
+            May =5,
+            June =6,
+            July =7,
+            August =8,
+            September=9,
+            October =10,
+            November =11,
+            December =12
+        }
+
         static private double ReadWithCheckDouble()
         {
             bool check = false;
-            double num = 0;
+            double result = 0;
             while (!check)
             {
                 string str = Console.ReadLine();
-                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out num);
+                check = double.TryParse(str, NumberStyles.Float, new CultureInfo("en-US"), out result);
                 if (!check)
                 {
-                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out num);
+                    check = double.TryParse(str, NumberStyles.Float, new CultureInfo("ru-RU"), out result);
                     if (!check)
                     {
                         Console.WriteLine("Некорректно, еще раз");
@@ -38,7 +54,7 @@ namespace Module_4_Task_5
                     }
                 }
             }
-            return num;
+            return result;
         }
 
         static private int ReadWithCheckInt(int lowerLimit,int upperLimit)
@@ -59,12 +75,12 @@ namespace Module_4_Task_5
 
         static void Main(string[] args)
         {
-            double[] nums = new double[2];
+            double[] numbers = new double[2];
             for (int i = 0; i < 2; i++)
             {
 
                 Console.WriteLine($"Вводите {i + 1} из 2 чисел");
-                nums[i] = ReadWithCheckDouble();
+                numbers[i] = ReadWithCheckDouble();
             }
 
             Console.WriteLine("Выберите операцию:\n" +
@@ -75,7 +91,7 @@ namespace Module_4_Task_5
                 "нажмите 5 для возведения в степень (первое^второе)");
             int ans = ReadWithCheckInt(limit1,limit5);
             Operations op = (Operations)ans;
-            Console.WriteLine($"Результат мат. операции {op} = {Operation(nums[0],nums[1], op):f2}");
+            Console.WriteLine($"Результат мат. операции {op} = {DoOperation(numbers[0], numbers[1], op):f2}");
 
             Console.WriteLine("Вводите номер или название месяца по английски полностью или сокращенно " +
                 "- 3 буквы с которых начинается месяц (типа Dec, Nov, Sep)");
@@ -120,10 +136,10 @@ namespace Module_4_Task_5
             MonthNames month=(MonthNames)ans;
             
             Console.WriteLine($"В месяце {month} дней " +
-                $"{((str == "y" && ans == 2) ? DaysInMonth(month) + 1 : DaysInMonth(month))}.");
+                $"{((str == "y" && ans == 2) ? GetDaysInMonth(month) + 1 : GetDaysInMonth(month))}.");
         }
 
-        static private double Operation(double a,double b, Operations op)
+        static private double DoOperation(double a,double b, Operations op)
         {
             double result = 0;
             switch (op)
@@ -171,7 +187,7 @@ namespace Module_4_Task_5
             return false;
         }
 
-        static private int DaysInMonth(MonthNames name)
+        static private int GetDaysInMonth(MonthNames name)
         {
             int result = 0;
             //Здесь всего 3 варианта ответа 31/30/28 дней. Так что я решил

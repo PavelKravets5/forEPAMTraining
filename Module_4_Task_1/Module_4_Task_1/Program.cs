@@ -5,6 +5,8 @@ namespace Module_4_Task_1
 {
     class Program
     {
+        private const int limit1 = 1;
+
         static private int GetMaxEl(int[]arr)
         {
             int max = arr[0];
@@ -58,7 +60,7 @@ namespace Module_4_Task_1
             }
         }
 
-        static private int DifferenceBetweenMinMax(int[]arr)
+        static private int GetDifferenceBetweenMinMax(int[]arr)
         {
             return GetMaxEl(arr) - GetMinEl(arr);
         }
@@ -78,12 +80,12 @@ namespace Module_4_Task_1
             return arr.Min();
         }
 
-        static private int DifferenceBetweenMinMaxByLinq(int[]arr)
+        static private int GetDifferenceBetweenMinMaxByLinq(int[]arr)
         {
             return arr.Max() - arr.Min();
         }
 
-        static private int[] TransformArrByLinq(int []arr)
+        static private int[] GetTransformArrByLinq(int []arr)
         {
             int max = arr.Max();
             int min = arr.Min();
@@ -97,24 +99,17 @@ namespace Module_4_Task_1
             return arr.Select(el => el).ToArray();
         }
 
-        private const int limit1 = 1;
-
         //Я долго думал как убрать или уменьшить длиннющие
         //полотнища кода, где ввожу данные, проверяю корректность ввода, корректность ограничений,
         //лишь бы не выносить Console.WriteLine(), Console.ReadLine() за пределы метода Main
         //Я так и не придумал, и сделал так (здесь и далее):
         static private int ReadWithCheckInt()
         {
-            bool check = false;
-            int result = 0;
+            bool check = int.TryParse(Console.ReadLine(), out int result);
             while (!check)
             {
+                Console.WriteLine("Некорректно, еще раз");
                 check = int.TryParse(Console.ReadLine(), out result);
-                if (check == false)
-                {
-                    Console.WriteLine("Некорректно, еще раз");
-                    check = false;
-                }
             }
             return result;
         }
@@ -184,7 +179,7 @@ namespace Module_4_Task_1
             Console.WriteLine($"\n\nЗаполнено.\n\n" +
                 $"Через циклы\n\n" +
                 $"Макс. эл. массива: {GetMaxEl(arr)}, мин. эл. массива: {GetMinEl(arr)}\n" +
-                $"Разность между макс. и мин. эл.: {DifferenceBetweenMinMax(arr)}, " +
+                $"Разность между макс. и мин. эл.: {GetDifferenceBetweenMinMax(arr)}, " +
                 $"сумма эл. массива: {GetSum(arr)}.\n" +
                 $"По итогам увеличения четных эл. массива на макс. эл. массива и " +
                 $"уменьшения нечетных на мин. эл." +
@@ -201,13 +196,13 @@ namespace Module_4_Task_1
             Console.WriteLine($"\n\nТеперь тоже самое через Linq:\n\n" +
                 $"Макс. эл. массива: {GetMaxElByLinq(copyArr)}, " +
                 $"мин. эл. массива: {GetMinElByLinq(copyArr)}\n" +
-                $"Разность между макс. и мин. эл.: {DifferenceBetweenMinMaxByLinq(copyArr)}, " +
+                $"Разность между макс. и мин. эл.: {GetDifferenceBetweenMinMaxByLinq(copyArr)}, " +
                 $"сумма эл. массива: {GetSumByLinq(copyArr)}.\n" +
                 $"По итогам увеличения четных эл. массива на макс. эл. массива и " +
                 $"уменьшения нечетных на мин. эл." +
                 $"массив выглядит так:");
 
-            copyArr=TransformArrByLinq(copyArr);
+            copyArr= GetTransformArrByLinq(copyArr);
             foreach(int el in copyArr)
             {
                 Console.Write($"{el} ");
