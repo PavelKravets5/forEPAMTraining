@@ -11,8 +11,8 @@ namespace Module_5
         public delegate void GameHandler(string message);
         public event GameHandler Notification =null;
 
-        public readonly int _trapsNumber = 0;
-        public readonly Position _finishPosition = null;
+        private int _trapsNumber = 0;
+        private PositionOnThePlane _finishPosition = null;
 
         private int[,] _field = null;
         private int _fieldSize =0;
@@ -26,14 +26,14 @@ namespace Module_5
             Random rnd = new Random();
             _field = new int[_fieldSize, _fieldSize];
             _player = new Player(starPosNumber,_fieldSize);
-            _finishPosition = new Position(fieldSize-1-_player._position._x, fieldSize-1-_player._position._y);
+            _finishPosition = new PositionOnThePlane(fieldSize-1-_player.Position.X, fieldSize-1-_player.Position.Y);
 
             for(int i=0;i<fieldSize;i++)
             {
                 for(int j=0;j<fieldSize;j++)
                 {
-                    Position temp = new Position(i, j);
-                    if (count < _trapsNumber && _player._position != temp & _finishPosition != temp)
+                    PositionOnThePlane temp = new PositionOnThePlane(i, j);
+                    if (count < _trapsNumber && _player.Position != temp & _finishPosition != temp)
                     {
                         _field[i, j] = rnd.Next(0, 11);
                         if (_field[i, j] > 0)
@@ -57,11 +57,11 @@ namespace Module_5
                 $"на стартовой и финишной клетках - безопастно\n");
 
             Notification?.Invoke("\n");
-            if (_field[_player._position._x, _player._position._y] > 0)
+            if (_field[_player.Position.X, _player.Position.Y] > 0)
             {
                 Notification?.Invoke($"Произошел взрыв с силой: " +
-                    $"{_field[_player._position._x, _player._position._y]}\n");
-                _field[_player._position._x, _player._position._y] = -1;
+                    $"{_field[_player.Position.X, _player.Position.Y]}\n");
+                _field[_player.Position.X, _player.Position.Y] = -1;
             }
             Notification?.Invoke($"Колл-во жизней: {_player.Lifes}\n");
 
@@ -70,14 +70,14 @@ namespace Module_5
                 for (int j = 0; j < _fieldSize; j++)
                 {
 
-                    if (i == _player._position._x && j == _player._position._y)
+                    if (i == _player.Position.X && j == _player.Position.Y)
                     {
                         Notification?.Invoke("you ");
                         _field[i, j] = -1;
                     }
                     else
                     {
-                        if (i == _finishPosition._x && j == _finishPosition._y)
+                        if (i == _finishPosition.X && j == _finishPosition.Y)
                         {
                             Notification?.Invoke("fin ");
                         }
@@ -106,37 +106,37 @@ namespace Module_5
             {
                 case ConsoleKey.UpArrow:
                     {
-                        if(_player._position._x>0)
+                        if(_player.Position.X > 0)
                         {
                             success = true;
-                            _player._position._x -= 1;
+                            _player.Position.X -= 1;
                         }
                     }
                     break;
                 case ConsoleKey.DownArrow:
                     {
-                        if (_player._position._x < _fieldSize-1)
+                        if (_player.Position.X < _fieldSize-1)
                         {
                             success = true;
-                            _player._position._x += 1;
+                            _player.Position.X += 1;
                         }
                     }
                     break;
                 case ConsoleKey.LeftArrow:
                     {
-                        if (_player._position._y > 0)
+                        if (_player.Position.Y > 0)
                         {
                             success = true;
-                            _player._position._y -= 1;
+                            _player.Position.Y -= 1;
                         }
                     }
                     break;
                 case ConsoleKey.RightArrow:
                     {
-                        if (_player._position._y < _fieldSize-1)
+                        if (_player.Position.Y < _fieldSize-1)
                         {
                             success = true;
-                            _player._position._y += 1;
+                            _player.Position.Y += 1;
                         }
                     }
                     break;
@@ -157,16 +157,16 @@ namespace Module_5
                         goto case ConsoleKey.RightArrow;
                     }
             }
-            if(_field[_player._position._x, _player._position._y]>0)
+            if(_field[_player.Position.X, _player.Position.Y] >0)
             {
-                _player.Lifes -= _field[_player._position._x, _player._position._y];
+                _player.Lifes -= _field[_player.Position.X, _player.Position.Y];
             }
             return success;
         }
 
         public bool IsGameOver()
         {
-            if (_player.Lifes != 0 && _player._position != _finishPosition)
+            if (_player.Lifes != 0 && _player.Position != _finishPosition)
             {
                 return false;
             }

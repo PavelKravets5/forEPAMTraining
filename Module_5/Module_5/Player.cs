@@ -6,7 +6,11 @@ namespace Module_5
 {
     class Player
     {
-        public Position _position { get; set; } = null;
+        // В соответствии со статьей на хабре, имя открытой переменной - в Pascal casing,
+        // тогда оно совпадает с именем класса, и я его (имя класса) на всякий случай поменял на
+        // PositionOnThePlane. 
+        // Надеюсь, что не ошибаюсь.
+        public PositionOnThePlane Position { get; set; } = null;
         private int _lifes = 10;
         
         public int Lifes
@@ -34,22 +38,22 @@ namespace Module_5
             {
                 case 1:
                     {
-                        _position = new Position(0, 0);
+                        Position = new PositionOnThePlane(0, 0);
                     }
                     break;
                 case 2:
                     {
-                        _position = new Position(0, fieldSize-1);
+                        Position = new PositionOnThePlane(0, fieldSize-1);
                     }
                     break;
                 case 3:
                     {
-                        _position = new Position(fieldSize - 1, 0);
+                        Position = new PositionOnThePlane(fieldSize - 1, 0);
                     }
                     break;
                 case 4:
                     {
-                        _position = new Position(fieldSize - 1, fieldSize - 1);
+                        Position = new PositionOnThePlane(fieldSize - 1, fieldSize - 1);
                     }
                     break;
             }
