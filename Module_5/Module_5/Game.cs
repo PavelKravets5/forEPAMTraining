@@ -8,9 +8,8 @@ namespace Module_5
     {
         private const int MIN_NUMBERS_OF_POSSIBILITIES = 2;
 
-
-        public delegate void GameNotificationHandler(string message);
-        public event GameNotificationHandler Notification =null;
+        public delegate void GameHandler(string message);
+        public event GameHandler Notification =null;
 
         public readonly int _trapsNumber = 0;
         public readonly Position _finishPosition = null;
@@ -52,9 +51,10 @@ namespace Module_5
 
         public void ConsolePrintField()
         {         
-            Notification?.Invoke($"Цель: достич позиции отмеченной как \"fin\"" +
-                $"игрок на позиции отмеченной как \"you\", поля, где Вы уже побывали" +
-                $"будут помечены как \"sfl\" (от \"safely\")\n");
+            Notification?.Invoke($"Цель: достич позиции отмеченной как \"fin\", " +
+                $"игрок на позиции отмеченной как \"you\", поля, где Вы уже побывали " +
+                $"будут помечены как \"sfl\" (от \"safely\"), " +
+                $"на стартовой и финишной клетках - безопастно\n");
 
             Notification?.Invoke("\n");
             if (_field[_player._position._x, _player._position._y] > 0)
@@ -166,22 +166,22 @@ namespace Module_5
 
         public bool IsGameOver()
         {
-            if (_player.Lifes == 0)
+            if (_player.Lifes != 0 && _player._position != _finishPosition)
             {
-                Notification?.Invoke("Вы проиграли");
-                return true;
+                return false;
             }
             else
             {
-                if (_player._position == _finishPosition)
+                ConsolePrintField();
+                if (_player.Lifes == 0)
                 {
-                    Notification?.Invoke("ВЫ ВЫИГРАЛИ!!!");
-                    return true;
+                    Notification?.Invoke("\nВы проиграли\n");
                 }
                 else
                 {
-                    return false;
+                    Notification?.Invoke("\nВЫ ВЫИГРАЛИ!!!\n");                    
                 }
+                return true;
             }
 
         }

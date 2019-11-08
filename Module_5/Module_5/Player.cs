@@ -21,6 +21,10 @@ namespace Module_5
                 {
                     _lifes =value;
                 }
+                else
+                {
+                    _lifes = 0;
+                }
             }
         }
 

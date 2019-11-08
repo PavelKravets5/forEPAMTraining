@@ -21,7 +21,8 @@ namespace Module_5
                     Console.WriteLine("Некорректно, еще раз");
                 }
 
-                Console.WriteLine("Введите длинну строны игрового поля, оно квадратное (>=2):");
+                Console.WriteLine("Введите длинну строны игрового поля, оно квадратное " +
+                    "(длинна стороны >=2):");
                 int fieldSize = 0;
                 while(!ServiceClass.ReadWithCheck(Console.ReadLine(), ServiceClass.LIMIT_2,
                     out fieldSize))
@@ -32,7 +33,7 @@ namespace Module_5
                 int maxTrapsNumber = (int)Math.Pow(fieldSize, 2) - 2;
 
                 Console.WriteLine($"Введите колличество ловушек, в пределах " +
-                    $"от {ServiceClass.LIMIT_0} до ({maxTrapsNumber}):");
+                    $"от {ServiceClass.LIMIT_0} до кол-во_клеток_поля - 2 = {maxTrapsNumber}:");
 
                 int trapsNumber = 0;
                 while(!ServiceClass.ReadWithCheck(Console.ReadLine(), ServiceClass.LIMIT_0,
@@ -41,22 +42,23 @@ namespace Module_5
                     Console.WriteLine("Некорректно, еще раз");
                 }
 
+                Console.Clear();
                 Game game = new Game(startPosNumber,fieldSize,trapsNumber);
                 game.Notification += ServiceClass.DisplayMessage;
 
                 do
-                {
-                    Console.Clear();
+                {                    
                     game.ConsolePrintField();
                     Console.WriteLine("Ходите. Ожидание ввода клавиши WASD или стрелки:");
                     while (!game.Move(Console.ReadKey()))
                     {
                         Console.WriteLine("\nНекорректно, еще раз");
                     }
+                    Console.Clear();
                 } while (!game.IsGameOver());
 
 
-                Console.WriteLine("Еще партию?");
+                Console.WriteLine("\nЕще партию?");
                 newGame = ServiceClass.ReadYOrN() == "y" ? true : false;
             }
         }
