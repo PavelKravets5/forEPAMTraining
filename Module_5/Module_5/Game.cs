@@ -54,7 +54,8 @@ namespace Module_5
             Notification?.Invoke($"Цель: достич позиции отмеченной как \"fin\", " +
                 $"игрок на позиции отмеченной как \"you\", поля, где Вы уже побывали " +
                 $"будут помечены как \"sfl\" (от \"safely\"), " +
-                $"на стартовой и финишной клетках - безопастно\n");
+                $"на стартовой и финишной клетках - безопастно\n" +
+               $"Осталось {_trapsNumber} рабочих ловушек.\n");
 
             Notification?.Invoke("\n");
             if (_field[_player.Position.X, _player.Position.Y] > 0)
@@ -160,20 +161,21 @@ namespace Module_5
             if(_field[_player.Position.X, _player.Position.Y] >0)
             {
                 _player.Lifes -= _field[_player.Position.X, _player.Position.Y];
+                _trapsNumber--;
             }
             return success;
         }
 
         public bool IsGameOver()
         {
-            if (_player.Lifes != 0 && _player.Position != _finishPosition)
+            if (_player.Lifes > 0 && _player.Position != _finishPosition)
             {
                 return false;
             }
             else
             {
                 ConsolePrintField();
-                if (_player.Lifes == 0)
+                if (_player.Lifes <= 0)
                 {
                     Notification?.Invoke("\nВы проиграли\n");
                 }

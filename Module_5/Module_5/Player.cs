@@ -14,27 +14,8 @@ namespace Module_5
         // вместо этого используйте свойства; используйте автоматические свойства;"
         // поэтому я использую пример с metanit.
         public PositionOnThePlane Position { get; set; } = null;
-        private int _lifes = 10;
+        public int Lifes { get; set; } = 10;
         
-        public int Lifes
-        {
-            get
-            {
-                return _lifes;
-            }
-            set
-            {
-                if(value>=0)
-                {
-                    _lifes =value;
-                }
-                else
-                {
-                    _lifes = 0;
-                }
-            }
-        }
-
         public Player(int starPosNumber,int fieldSize)
         {
             switch (starPosNumber)
