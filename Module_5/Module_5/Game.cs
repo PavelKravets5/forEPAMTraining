@@ -6,6 +6,7 @@ namespace Module_5
 {
     class Game
     {
+        // Версия с классом Player
         private const int MIN_NUMBERS_OF_POSSIBILITIES = 2;
 
         public delegate void GameHandler(string message);
