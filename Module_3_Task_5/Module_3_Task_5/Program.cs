@@ -19,6 +19,7 @@ namespace Module_3_Task_5
         const int upperLimit = 9;
         const int lowetLimit = 0;
 
+
         static void Main(string[] args)
         {
             Console.WriteLine("Вводите число:");
@@ -36,6 +37,7 @@ namespace Module_3_Task_5
             { 
                 check = int.TryParse(Console.ReadLine(), out x);
                 if(check==false || x< lowetLimit || x> upperLimit)
+
                 {
                     check = false;
                     Console.WriteLine("Некорректно, еще раз");

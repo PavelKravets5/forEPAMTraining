@@ -7,6 +7,7 @@ namespace Module_3_Task_6
         static void Main(string[] args)
         {
             Console.WriteLine("Вводите длинну массива");
+
             int n = 0 ;// компилятор требует чтобы n было проинициализировано
             bool check = false;
             while (!check)
@@ -25,6 +26,7 @@ namespace Module_3_Task_6
             {
                 Console.WriteLine($"Вводите {i+1} эл. массива");
                 check = double.TryParse(Console.ReadLine(), out double el);
+
                 while (!check)
                 {
                     Console.WriteLine("Некорректно, еще раз");

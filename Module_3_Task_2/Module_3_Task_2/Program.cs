@@ -7,7 +7,9 @@ namespace Module_3_Task_2
         static void Main(string[] args)
         {
             Console.WriteLine("Введите N");
+
             bool check = int.TryParse(Console.ReadLine(), out int n);
+
             while (!check)
             {
                 Console.WriteLine("Некорректно, еще раз");

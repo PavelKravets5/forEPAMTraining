@@ -23,9 +23,10 @@ namespace Module_5
 
                 Console.WriteLine("Введите длинну строны игрового поля, оно квадратное " +
                     "(длинна стороны >=2):");
-                
+
+                int fieldSize = 0;
                 while(!ServiceClass.ReadWithCheck(Console.ReadLine(), ServiceClass.LIMIT_2,
-                    out int fieldSize))
+                    out fieldSize))
                 {
                     Console.WriteLine("Некорректно, еще раз");
                 }
