@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documents\\EPAM\\ASP.NET Training Autumn 2019\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj": {}
+    "D:\\GitStorage\\forEPAMTraining\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj": {}
   },
   "projects": {
-    "D:\\Documents\\EPAM\\ASP.NET Training Autumn 2019\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj": {
+    "D:\\GitStorage\\forEPAMTraining\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documents\\EPAM\\ASP.NET Training Autumn 2019\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj",
+        "projectUniqueName": "D:\\GitStorage\\forEPAMTraining\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj",
         "projectName": "Module_3_Task_4",
-        "projectPath": "D:\\Documents\\EPAM\\ASP.NET Training Autumn 2019\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj",
+        "projectPath": "D:\\GitStorage\\forEPAMTraining\\Module_3_Task_4\\Module_3_Task_4\\Module_3_Task_4.csproj",
         "packagesPath": "C:\\Users\\Pavel\\.nuget\\packages\\",
-        "outputPath": "D:\\Documents\\EPAM\\ASP.NET Training Autumn 2019\\Module_3_Task_4\\Module_3_Task_4\\obj\\",
+        "outputPath": "D:\\GitStorage\\forEPAMTraining\\Module_3_Task_4\\Module_3_Task_4\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

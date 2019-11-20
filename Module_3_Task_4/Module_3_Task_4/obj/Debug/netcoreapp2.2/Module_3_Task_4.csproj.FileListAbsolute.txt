@@ -9,3 +9,14 @@ D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_4\Module_3_Task_4\o
 D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.AssemblyInfo.cs
 D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.dll
 D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.pdb
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\bin\Debug\netcoreapp2.2\Module_3_Task_4.deps.json
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\bin\Debug\netcoreapp2.2\Module_3_Task_4.runtimeconfig.json
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\bin\Debug\netcoreapp2.2\Module_3_Task_4.runtimeconfig.dev.json
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\bin\Debug\netcoreapp2.2\Module_3_Task_4.dll
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\bin\Debug\netcoreapp2.2\Module_3_Task_4.pdb
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.csprojAssemblyReference.cache
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.csproj.CoreCompileInputs.cache
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.AssemblyInfoInputs.cache
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.AssemblyInfo.cs
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.dll
+D:\GitStorage\forEPAMTraining\Module_3_Task_4\Module_3_Task_4\obj\Debug\netcoreapp2.2\Module_3_Task_4.pdb
