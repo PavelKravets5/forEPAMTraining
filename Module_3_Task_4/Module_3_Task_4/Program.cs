@@ -26,7 +26,6 @@ namespace Module_3_Task_4
 
                 
                 while (Math.Floor(num*Math.Pow(10,fracPart)) != num*Math.Pow(10, fracPart))
-
                 {
                     fracPart++;
                 }
@@ -34,7 +33,6 @@ namespace Module_3_Task_4
                 int intPart = 0;
                 double temp = 0;
                 num*= Math.Pow(10, fracPart);
-
                 while (num > 0)
                 {
                     temp = Math.Floor(num / 10);

@@ -8,3 +8,4 @@ D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_5\Module_3_Task_5\o
 D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_5\Module_3_Task_5\obj\Debug\netcoreapp2.2\Module_3_Task_5.AssemblyInfo.cs
 D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_5\Module_3_Task_5\obj\Debug\netcoreapp2.2\Module_3_Task_5.dll
 D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_5\Module_3_Task_5\obj\Debug\netcoreapp2.2\Module_3_Task_5.pdb
+D:\Documents\EPAM\ASP.NET Training Autumn 2019\Module_3_Task_5\Module_3_Task_5\obj\Debug\netcoreapp2.2\Module_3_Task_5.csprojAssemblyReference.cache
