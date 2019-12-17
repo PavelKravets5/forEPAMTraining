@@ -1,0 +1,46 @@
+﻿<input type="button" value="Обратно" class="btn btn-default" (click)="backwards()" />
+<input type="button" value="Добавить" class="btn btn-default" (click)="addPhone()" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Phone</td>
+            <td>Кнопка</td>
+            <td>Кнопка</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let phone of phones">
+            <ng-template [ngTemplateOutlet]="loadTemplate(phone)"
+                         [ngTemplateOutletContext]="{ $implicit: phone}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #readOnlyTemplate let-phone>
+    <td>{{phone.Id}}</td>
+    <td>{{phone.Phone}}</td>
+    <td>
+        <input type="button" value="Изменить" class="btn btn-default" (click)="editPhone(phone)" />
+    </td>
+    <td>
+        <input type="button" value="Удалить" (click)="deletePhone(phone.Id)" class="btn btn-danger" />
+    </td>
+</ng-template>
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="editedPhone.Id" disabled readonly class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedPhone.Phone" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="savePhone()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>

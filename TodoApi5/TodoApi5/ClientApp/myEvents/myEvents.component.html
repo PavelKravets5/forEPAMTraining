@@ -1,0 +1,79 @@
+﻿
+
+<h1>Каталог событий</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addMyEvent()" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Дата</td>
+            <td>Категория</td>
+            <td>Картинка</td>
+            <td>Место проведения события</td>
+            <td>Описание</td>
+            <td>Организация</td>
+            <td>Кнопка</td>
+            <td>Кнопка</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let myEvent of myEvents">
+            <ng-template [ngTemplateOutlet]="loadTemplate(myEvent)"
+                         [ngTemplateOutletContext]="{ $implicit: myEvent}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #readOnlyTemplate let-myEvent>
+    <td>{{myEvent.Id}}</td>
+    <td>{{myEvent.EventTitle}}</td>
+    <td>{{myEvent.EventDate}}</td>
+    <td>{{myEvent.Category}}</td>
+    <td><img [myPicture]="myEvent" width="50" height="50" /></td>
+    <td>{{myEvent.EventVenue}}</td>
+    <td>{{myEvent.Discription}}</td>
+    <td>{{myEvent.Organizer}}</td>
+    <td>
+        <input type="button" value="Изменить" class="btn btn-default" (click)="editMyEvent(myEvent)" />
+    </td>
+    <td>
+        <input type="button" value="Удалить" (click)="deleteMyEvent(myEvent)" class="btn btn-danger" />
+    </td>
+</ng-template>
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.Id" readonly disabled class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.EventTitle" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.EventDate" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.Category" class="form-control" />
+    </td>
+    <td>
+        <input type="file" (change)="onFileChanged($event)">
+
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.EventVenue" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.Discription" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedMyEvent.Organizer" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveMyEvent()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>

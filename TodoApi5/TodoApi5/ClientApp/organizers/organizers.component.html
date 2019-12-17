@@ -1,0 +1,63 @@
+﻿
+<h1>Каталог организаций</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addOrganizer()" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+
+            <td>Id</td>
+            <td>Организатор/организация</td>
+            <td>Адрес</td>
+            <td>Email</td>
+            <td>Телефоны</td>
+            <td>Кнопка</td>
+            <td>Кнопка</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let organizer of organizers">
+            <ng-template [ngTemplateOutlet]="loadTemplate(organizer)"
+                         [ngTemplateOutletContext]="{ $implicit: organizer}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #readOnlyTemplate let-organizer>
+    <td>{{organizer.Id}}</td>
+    <td>{{organizer.Organizer}}</td>
+    <td>{{organizer.Adress}}</td>
+    <td>
+        <input type="button" value="Показать" class="btn btn-default" (click)="showEmails(organizer.Id)" />
+    </td>
+    <td>
+        <input type="button" value="Показать" class="btn btn-default" (click)="showPhones(organizer.Id)" />
+    </td>
+    <td>
+        <input type="button" value="Изменить" class="btn btn-default" (click)="editOrganizer(organizer)" />
+    </td>
+    <td>
+        <input type="button" value="Удалить" (click)="deleteOrganizer(organizer)" class="btn btn-danger" />
+    </td>
+</ng-template>
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="editedOrganizer.Id" readonly disabled class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedOrganizer.Organizer" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedOrganizer.Adress" class="form-control" />
+    </td>
+    <td>...</td>
+    <td>...</td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveOrganizer()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>

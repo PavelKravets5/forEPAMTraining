@@ -1,0 +1,48 @@
+﻿<input type="button" value="Обратно" class="btn btn-default" (click)="backwards()" />
+
+<h1>Каталог организаций</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addEmail()" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+            <td>Кнопка</td>
+            <td>Кнопка</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let email of emails">
+            <ng-template [ngTemplateOutlet]="loadTemplate(email)"
+                         [ngTemplateOutletContext]="{ $implicit: email}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #readOnlyTemplate let-email>
+    <td>{{email.Id}}</td>
+    <td>{{email.Email}}</td>
+    <td>
+        <input type="button" value="Изменить" class="btn btn-default" (click)="editEmail(email)" />
+    </td>
+    <td>
+        <input type="button" value="Удалить" (click)="deleteEmail(email.Id)" class="btn btn-danger" />
+    </td>
+</ng-template>
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="editedEmail.Id" disabled readonly class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedEmail.Email" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveEmail()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>
